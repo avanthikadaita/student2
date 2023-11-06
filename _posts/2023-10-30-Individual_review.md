@@ -174,7 +174,6 @@ This code snippet I worked on is how the data for the graph is created
 <ul class = "bullet-points">
   <li>Creating backend code for the graph</li>
   <li>Connecting frontend and backend for the graph</li>
-  <li>Working on a lot of the portfolio Optimizer</li>
 </ul>
 
 ### Issues:
