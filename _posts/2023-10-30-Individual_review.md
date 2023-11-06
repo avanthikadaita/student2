@@ -24,11 +24,11 @@ type: tangibles
 
 ### Getting data
 
-Objective: Get real time stock data
+Objective: Get details on each type of intrument 
 
 <ul class = "bullet-points">
-  <li>Approach: Use Yahoo Finance python module to get data</li>
-  <li>Challenges: Need to handle multiple symbols, different date ranges (daily, monthly), and different types of data</li>
+  <li>Approach: Acquire information about different types of insturments</li>
+  <li>Challenges: Utilize a custom Python script to gather data</li>
   <li>Problems faced: None</li>
 </ul>
 
@@ -52,90 +52,120 @@ Objective: Send data from frontend to backend and get data
 
 These are some code snippets I think show contribution to the code
 
-### Python
+### HTML
 
 This code snippet I worked on is how the data for the graph is created
 
-```python
-from flask import Blueprint, jsonify, request
-import pandas as pd
-import yfinance as yf
-import plotly.graph_objs as go
-from flask_restful import Api, Resource
-import numpy as np
-from flask_cors import CORS
-
-stock_api = Blueprint('stock_api', __name__, url_prefix='/api/stocks')
-api = Api(stock_api)
-
-CORS(stock_api)
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments Practice Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style> -->
 
 
-def get_stock_graph(stock_name):
-    end_date = datetime.now()
-    start_date = end_date - pd.Timedelta(days=4856)
-
-    df = yf.download(stock_name, start=start_date, end=end_date)
-
-    graph = go.Figure(data=go.Candlestick(x=df.index,
-                                          open=df['Open'],
-                                          high=df['High'],
-                                          low=df['Low'],
-                                          close=df['Close'],
-                                          name=stock_name))
-    graph.update_layout(title=f'{stock_name} Stock Price',
-                        xaxis_title='Date',
-                        yaxis_title='Price')
-
-    graph_data = graph.to_dict()
-    graph_data['data'][0]['x'] = graph_data['data'][0]['x'].astype(
-        str).tolist()
-    graph_data['data'][0]['open'] = graph_data['data'][0]['open'].tolist()
-    graph_data['data'][0]['high'] = graph_data['data'][0]['high'].tolist()
-    graph_data['data'][0]['low'] = graph_data['data'][0]['low'].tolist()
-    graph_data['data'][0]['close'] = graph_data['data'][0]['close'].tolist()
-
-    return graph_data
-
-
-class _ReadStockGraph(Resource):
-    def get(self, stock_name):
-        graph = get_stock_graph(stock_name)
-        return graph
-
-```
-
-### JavaScript
-
-This is the code that connects the backend and frontend Via JavaScript to send a request for the graph data and plots it
-
-```python
-%%js
-function getStockGraph() {
-            const selectedStock = document.getElementById('stock-input').value;
-            const button = document.getElementById('collect');
-            const apiUrl = 'http://localhost:8282/api/stocks/stock_graph/' + selectedStock;
-            button.textContent = 'Loading...';
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(graphData => {
-                    Plotly.newPlot('graph', graphData.data, graphData.layout);
-                    button.textContent = 'Display Graph';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    button.textContent = 'Display Graph';
-                });
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments Practice Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
         }
-        const stockInput = document.getElementById('stock-input');
-        const collectButton = document.getElementById('collect');
-        stockInput.addEventListener("keydown", function (event) {
-            if (event.key === 'Enter') {
-                getStockGraph();
+        header {
+            background-color: #ffb6c1;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>Instruments Practice Tracker</h1>
+        <form id="practice-form">
+            <label for="practice-time">Practice Time (minutes):</label>
+            <input type="number" id="practice-time" required>
+            <button type="submit">Save</button>
+        </form>
+        <canvas id="practice-chart" width="400" height="200"></canvas>
+    </section>
+
+    <script>
+        const practiceData = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Practice Time (minutes)',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                },
+            ],
+        };
+
+        const ctx = document.getElementById('practice-chart').getContext('2d');
+        const practiceChart = new Chart(ctx, {
+            type: 'bar',
+            data: practiceData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            },
+        });
+
+        const practiceForm = document.getElementById('practice-form');
+        practiceForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const practiceTimeInput = document.getElementById('practice-time');
+            const practiceTime = parseInt(practiceTimeInput.value);
+
+            if (!isNaN(practiceTime)) {
+                // Add the practice time to the chart data
+                const currentDate = new Date().toLocaleDateString();
+                practiceData.labels.push(currentDate);
+                practiceData.datasets[0].data.push(practiceTime);
+
+                // Update the chart
+                practiceChart.update();
+
+                // Clear the input field
+                practiceTimeInput.value = '';
             }
         });
-        collectButton.addEventListener("click", getStockGraph);
-```
+    </script>
+</body> 
+
 
 # Github Analytics
 
