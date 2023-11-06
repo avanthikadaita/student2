@@ -5,9 +5,8 @@ layout: post
 title: Game of Life
 description: Grab of the Game of Life from APCSA repo.
 type: hacks
-courses: { compsci: {week: } }
+courses: { compsci: {week: 2} }
 ---
-
 
 
 
