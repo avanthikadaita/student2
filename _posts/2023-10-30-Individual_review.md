@@ -1,4 +1,4 @@
----
+<!-- ---
 toc: false
 comments: false
 layout: post
@@ -6,7 +6,7 @@ title: Individual Review
 description: Tri 1 Individual Review
 courses: { compsci: { week: 11 } }
 type: tangibles
----
+--- -->
 
 <style>
   .bullet-points {
