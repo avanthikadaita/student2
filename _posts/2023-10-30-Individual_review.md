@@ -1,4 +1,4 @@
-<!-- ---
+---
 toc: false
 comments: false
 layout: post
@@ -6,7 +6,7 @@ title: Individual Review
 description: Tri 1 Individual Review
 courses: { compsci: { week: 11 } }
 type: tangibles
---- -->
+---
 
 <style>
   .bullet-points {
@@ -56,12 +56,72 @@ These are some code snippets I think show contribution to the code
 
 This code snippet I worked on is how the data for the graph is created
 
-<!-- <head>
+---
+toc: false
+comments: false
+layout: post
+title: Individual Review
+description: Tri 1 Individual Review
+courses: { compsci: { week: 11 } }
+type: tangibles
+---
+
+<style>
+  .bullet-points {
+    list-style-type: disc; 
+    margin-left: 40px; 
+  }
+  .bullet-points li {
+    margin-bottom: 20px; 
+  }
+</style>
+
+# Development Journey
+
+---
+
+### Getting data
+
+Objective: Get details on each type of instrument 
+
+<ul class = "bullet-points">
+  <li>Approach: Acquire information about different types of instruments</li>
+  <li>Challenges: Utilize a custom Python script to gather data</li>
+  <li>Problems faced: None</li>
+</ul>
+
+---
+
+### Connecting frontend and backend
+
+Objective: Send data from frontend to backend and get data
+
+<ul class = "bullet-points">
+  <li>Approach: Used JavaScript to send a request to the API with the GET method</li>
+  <li>Challenges: JavaScript code was complicated and took a while to get working</li>
+  <li>Problems faced: None</li>
+</ul>
+
+---
+
+# Code Snippet
+
+---
+
+These are some code snippets I think show contribution to the code
+
+### HTML
+
+This code snippet I worked on is how the data for the graph is created
+```python
+%%HTML
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instruments Practice Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style> -->
+    <style> 
 
 
 <head>
@@ -70,7 +130,7 @@ This code snippet I worked on is how the data for the graph is created
     <title>Instruments Practice Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
+        /* body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -102,7 +162,7 @@ This code snippet I worked on is how the data for the graph is created
             position: fixed;
             width: 100%;
             bottom: 0;
-        }
+        } */
     </style>
 </head>
 <body>
@@ -165,7 +225,7 @@ This code snippet I worked on is how the data for the graph is created
         });
     </script>
 </body> 
-
+```
 
 # Github Analytics
 
@@ -190,9 +250,7 @@ This code snippet I worked on is how the data for the graph is created
 
 ```python
 Hack: Given initial parameters for a car simulation, including its initial speed, acceleration rate, deceleration rate, maximum speed, and initial distance, write a program to simulate the car’s journey and determine the final speed, distance covered, and time taken before it either covers 1000 meters or slows down to below 5 m/s?
-```
 
-```python
 initial_speed = 10
 acceleration_rate = 2
 deceleration_rate = -1
@@ -224,17 +282,8 @@ while distance < target_distance and speed >= min_speed:
 
             if distance + distance_covered_deceleration >= target_distance:
                 time += (-speed + (speed ** 2 - 2 * deceleration_rate * (distance - target_distance)) ** 0.5) / abs(deceleration_rate)
-                speed = min_speed
-                distance = target_distance
-            else:
-                time += time_to_decelerate
-                speed = min_speed
-                distance += distance_covered_deceleration
+                speed
 
-print(f"Final Speed: {speed} m/s")
-print(f"Distance Covered: {distance} meters")
-print(f"Time Taken: {time} seconds")
-```
 
 # Trimester One Reflections
 

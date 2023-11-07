@@ -1,4 +1,4 @@
-<!-- ---
+---
 toc: false
 comments: false
 layout: post
@@ -6,11 +6,9 @@ title: Graphs Fetch Code
 description: 
 type: tangibles
 courses: { compsci: {week: 12}}
---- -->
+---
 
 
-
-%%html
 
 <head>
     <meta charset="UTF-8">
@@ -18,7 +16,7 @@ courses: { compsci: {week: 12}}
     <title>Instruments Practice Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
+        /* body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -50,7 +48,7 @@ courses: { compsci: {week: 12}}
             position: fixed;
             width: 100%;
             bottom: 0;
-        }
+        } */
     </style>
 </head>
 <body>
@@ -63,7 +61,6 @@ courses: { compsci: {week: 12}}
         </form>
         <canvas id="practice-chart" width="400" height="200"></canvas>
     </section>
-
     <script>
         const practiceData = {
             labels: [],
@@ -77,7 +74,6 @@ courses: { compsci: {week: 12}}
                 },
             ],
         };
-
         const ctx = document.getElementById('practice-chart').getContext('2d');
         const practiceChart = new Chart(ctx, {
             type: 'bar',
